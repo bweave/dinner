@@ -12,6 +12,21 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>Dinners</h1>
+      <p>A handy helper for a weekly dinner menu!</p>
+      <nav>
+        <a href="/">Dinners</a>
+        <a href="/suggestions">Suggestions</a>
+      </nav>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <p>Made with ❤️ by @bweave ©<%= Time.current.year %></p>
+    </footer>
   </body>
 </html>
