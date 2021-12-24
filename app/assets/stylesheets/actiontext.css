@@ -6,6 +6,10 @@
  *= require trix
 */
 
+trix-toolbar .trix-button-group:not(:first-child) {
+  margin-left: 1.25vw;
+}
+
 /*
  * We need to override trix.css’s image gallery styles to accommodate the
  * <action-text-attachment> element we wrap around attachments. Otherwise,

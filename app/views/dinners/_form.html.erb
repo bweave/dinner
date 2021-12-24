@@ -17,6 +17,21 @@
   </div>
 
   <div>
+    <%= form.label :description %>
+    <%= form.rich_text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :ingredients %>
+    <%= form.rich_text_area :ingredients %>
+  </div>
+
+  <div>
+    <%= form.label :directions %>
+    <%= form.rich_text_area :directions %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
