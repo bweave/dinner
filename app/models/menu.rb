@@ -10,7 +10,6 @@ class Menu < ApplicationRecord
   accepts_nested_attributes_for :dinner_menus
 
   after_create do
-    # TODO: find a better name for last_suggested_at
     dinners.touch_all(:last_suggested_at)
   end
 
