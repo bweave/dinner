@@ -6,8 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -16,12 +16,20 @@
       <h1>Dinners</h1>
       <p>A handy helper for a weekly dinner menu!</p>
       <nav>
-        <a href="/">Dinners</a>
-        <a href="/suggestions">Suggestions</a>
+        <%= link_to "Home", root_url %>
+        <%= link_to "Create Menu", new_menu_path %>
+        <%= link_to "Recipes", dinners_path %>
+        <%= link_to "Add Recipe", new_dinner_path %>
       </nav>
     </header>
 
     <main>
+      <% flash.each do |msg_type, message| %>
+        <div class="flash <%= msg_type %>" role="alert">
+          <%= message %>
+        </div>
+      <% end %>
+
       <%= yield %>
     </main>
 

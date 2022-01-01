@@ -17,6 +17,11 @@
   </div>
 
   <div>
+    <%= form.label :picture %>
+    <%= form.file_field :picture, accept:'image/*' %>
+  </div>
+
+  <div>
     <%= form.label :description %>
     <%= form.rich_text_area :description %>
   </div>

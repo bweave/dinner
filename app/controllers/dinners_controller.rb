@@ -65,6 +65,6 @@ class DinnersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def dinner_params
-      params.require(:dinner).permit(:name, :last_suggested_at, :description, :ingredients, :directions)
+      params.require(:dinner).permit(:name, :last_suggested_at, :description, :ingredients, :directions, :picture)
     end
 end

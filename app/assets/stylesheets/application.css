@@ -13,3 +13,47 @@
  *= require_tree .
  *= require_self
  */
+:root {
+  --accent-bg: #fcfffd;
+  --accent: #22ba6e;
+  --accent-light: #B3FBFF;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #212121;
+    --accent-bg: #2B2B2B;
+    --text: #DCDCDC;
+    --text-light: #ABABAB;
+    --border: #666;
+    --accent: #22ba6e;
+    --accent-light: #B3FBFF;
+    --code: #F06292;
+    --preformatted: #CCC;
+    --disabled: #111;
+  }
+
+  img, video {
+    opacity: 1;
+  }
+}
+
+h1 small,
+h2 small,
+h3 small {
+  font-size: 0.5em;
+  color: #cfcfcf;
+}
+
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.flash {
+  padding: 0.5rem;
+}
+.flash.notice {
+  background-color: var(--accent);
+}

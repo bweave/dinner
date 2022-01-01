@@ -1,0 +1,17 @@
+<div id="<%= dom_id menu %>">
+    <h2>
+      <%= link_to menu do %>
+        <% if menu.this_week? %>
+          <mark><%= menu.title %></mark>
+        <% else %>
+          <%= menu.title %>
+      <% end %>
+    </h2>
+  <% end %>
+
+  <div id="dinners" class="d-flex">
+    <% menu.dinners.each do |dinner| %>
+      <%= render partial: "menus/dinner", locals: {dinner: dinner} %>
+    <% end %>
+  </div>
+</div>

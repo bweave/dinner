@@ -1,0 +1,6 @@
+<div id="<%= dom_id dinner %>">
+  <% if dinner.picture.representable? %>
+    <div><%= image_tag dinner.picture.variant(:thumb) %></div>
+  <% end %>
+  <p><%= link_to dinner.name, dinner %></p>
+</div>
