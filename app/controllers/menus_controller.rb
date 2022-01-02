@@ -3,7 +3,7 @@ class MenusController < ApplicationController
 
   # GET /menus or /menus.json
   def index
-    @menus = Menu.includes(:dinners).order(starts_at: :desc).limit(3)
+    @menus = Menu.includes(:recipes).order(starts_at: :desc).limit(3)
   end
 
   # GET /menus/1 or /menus/1.json
@@ -12,12 +12,12 @@ class MenusController < ApplicationController
 
   # GET /menus/new
   def new
-    next_week = Menu.order(starts_at: :desc).first.starts_at.next_week
-    random_dinners = RandomDinnersQuery.call
+    next_week = Menu.order(starts_at: :desc).first_or_initialize(starts_at: Time.current.beginning_of_week).starts_at.next_week
+    random_recipes = RandomRecipesQuery.call
     @menu = Menu.new(
       starts_at: next_week,
       ends_at: next_week.end_of_week,
-      dinners: random_dinners,
+      recipes: random_recipes,
     )
   end
 
@@ -74,7 +74,7 @@ class MenusController < ApplicationController
       params.require(:menu).permit(
         :starts_at,
         :ends_at,
-        dinner_menus_attributes: [:id, dinner_attributes: [:id]],
+        dinner_menus_attributes: [:id, recipe_attributes: [:id]],
       )
     end
 end

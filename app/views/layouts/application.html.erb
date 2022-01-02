@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Dinners</title>
+    <title>Recipes</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,12 +14,12 @@
   <body>
     <header>
       <h1>Dinners</h1>
-      <p>A handy helper for a weekly dinner menu!</p>
+      <p>A handy helper for a weekly recipe menu!</p>
       <nav>
         <%= link_to "Home", root_url %>
         <%= link_to "Create Menu", new_menu_path %>
-        <%= link_to "Recipes", dinners_path %>
-        <%= link_to "Add Recipe", new_dinner_path %>
+        <%= link_to "Recipes", recipes_path %>
+        <%= link_to "Add Recipe", new_recipe_path %>
       </nav>
     </header>
 

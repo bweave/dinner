@@ -1,6 +1,6 @@
 class Menu < ApplicationRecord
   has_many :dinner_menus, inverse_of: :menu, dependent: :destroy
-  has_many :dinners, through: :dinner_menus
+  has_many :recipes, through: :dinner_menus
 
   validates :starts_at, presence: true
   validates :ends_at, presence: true
@@ -10,7 +10,7 @@ class Menu < ApplicationRecord
   accepts_nested_attributes_for :dinner_menus
 
   after_create do
-    dinners.touch_all(:last_suggested_at)
+    recipes.touch_all(:last_suggested_at)
   end
 
   def title
@@ -23,8 +23,8 @@ class Menu < ApplicationRecord
 
   def dinner_menus_attributes=(attributes)
     attributes.values.map do |attrs|
-      dinner_id = attrs.dig("dinner_attributes", "id").to_i
-      dinner_menus.find_or_initialize_by(dinner_id: dinner_id)
+      recipe_id = attrs.dig("recipe_attributes", "id").to_i
+      dinner_menus.find_or_initialize_by(recipe_id: recipe_id)
     end
   end
 

@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  dinner: one
+  recipe: one
   menu: one
 
 two:
-  dinner: two
+  recipe: two
   menu: two

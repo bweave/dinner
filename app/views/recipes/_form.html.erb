@@ -1,10 +1,10 @@
-<%= form_with(model: dinner) do |form| %>
-  <% if dinner.errors.any? %>
+<%= form_with(model: recipe) do |form| %>
+  <% if recipe.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(dinner.errors.count, "error") %> prohibited this dinner from being saved:</h2>
+      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
 
       <ul>
-        <% dinner.errors.each do |error| %>
+        <% recipe.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -19,11 +19,6 @@
   <div>
     <%= form.label :picture %>
     <%= form.file_field :picture, accept:'image/*' %>
-  </div>
-
-  <div>
-    <%= form.label :description %>
-    <%= form.rich_text_area :description %>
   </div>
 
   <div>

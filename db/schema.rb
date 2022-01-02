@@ -51,19 +51,12 @@ ActiveRecord::Schema.define(version: 2021_12_29_005923) do
   end
 
   create_table "dinner_menus", force: :cascade do |t|
-    t.integer "dinner_id", null: false
+    t.integer "recipe_id", null: false
     t.integer "menu_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["dinner_id"], name: "index_dinner_menus_on_dinner_id"
     t.index ["menu_id"], name: "index_dinner_menus_on_menu_id"
-  end
-
-  create_table "dinners", force: :cascade do |t|
-    t.string "name"
-    t.datetime "last_suggested_at", precision: 6
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipe_id"], name: "index_dinner_menus_on_recipe_id"
   end
 
   create_table "menus", force: :cascade do |t|
@@ -73,8 +66,15 @@ ActiveRecord::Schema.define(version: 2021_12_29_005923) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "recipes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "last_suggested_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "dinner_menus", "dinners"
   add_foreign_key "dinner_menus", "menus"
+  add_foreign_key "dinner_menus", "recipes"
 end

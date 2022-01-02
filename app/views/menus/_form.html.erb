@@ -19,14 +19,16 @@
 
   <div>
     <div class="d-flex">
-      <p>Dinners</p>
-      <%= link_to "Shuffle", new_menu_path %>
+      <p>Recipes</p>
+      <% if menu.new_record? %>
+        <%= link_to "Shuffle", new_menu_path %>
+      <% end %>
     </div>
 
-    <div id="dinners" class="d-flex">
+    <div id="recipes" class="d-flex">
       <%= form.fields_for :dinner_menus do |dmf| %>
-        <%= dmf.fields_for :dinner do |dinner_fields| %>
-          <%= render partial: "menus/dinner", locals: {dinner: dinner_fields.object} %>
+        <%= dmf.fields_for :recipe do |recipe_fields| %>
+          <%= render recipe_fields.object %>
         <% end %>
       <% end %>
     </div>

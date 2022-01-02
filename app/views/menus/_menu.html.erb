@@ -9,9 +9,9 @@
     </h2>
   <% end %>
 
-  <div id="dinners" class="d-flex">
-    <% menu.dinners.each do |dinner| %>
-      <%= render partial: "menus/dinner", locals: {dinner: dinner} %>
+  <div id="recipes" class="d-flex">
+    <% menu.recipes.each do |recipe| %>
+      <%= render recipe %>
     <% end %>
   </div>
 </div>

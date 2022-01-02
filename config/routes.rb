@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :menus
-  resources :dinners
+  resources :recipes
   resource :suggestions, only: %w[show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

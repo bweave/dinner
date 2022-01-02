@@ -1,9 +1,0 @@
-<div id="<%= dom_id dinner %>">
-  <h3><%= dinner.name %></h3>
-  <% if dinner.picture.representable? %>
-    <div><%= image_tag dinner.picture.variant(:medium) %></div>
-  <% end %>
-  <p><%= dinner.description %></p>
-  <p><%= dinner.ingredients %></p>
-  <p><%= dinner.directions %></p>
-</div>
