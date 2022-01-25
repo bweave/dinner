@@ -11,6 +11,9 @@ module Dinners
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    config.active_job.queue_name_prefix = "dinners_app_#{Rails.env}"
+    config.active_job.queue_adapter = Rails.env.test? ? :test : :sidekiq
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
