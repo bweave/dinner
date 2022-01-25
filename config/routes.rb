@@ -4,7 +4,7 @@ class AdminConstraint
   def matches?(request)
     return false unless request.session[:current_user_session_token].present?
     user = User.find_by(session_token: request.session[:current_user_session_token])
-    user # && user.admin?
+    user && user.admin?
   end
 end
 
