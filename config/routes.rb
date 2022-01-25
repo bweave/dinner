@@ -1,5 +1,17 @@
+require "sidekiq/web"
+
+class AdminConstraint
+  def matches?(request)
+    return false unless request.session[:current_user_session_token].present?
+    user = User.find_by(session_token: request.session[:current_user_session_token])
+    user # && user.admin?
+  end
+end
+
 Rails.application.routes.draw do
-  get 'static_pages/home'
+  mount Sidekiq::Web => "/sidekiq", :constraints => AdminConstraint.new
+
+  get "static_pages/home"
   resources :users
   resources :confirmations, only: %i[new create edit], param: :confirmation_token
   resources :passwords, only: %i[create edit new update], param: :password_reset_token
