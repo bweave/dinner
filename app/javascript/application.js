@@ -3,3 +3,8 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "trix"
 import "@rails/actiontext"
+import * as ActiveStorage from "@rails/activestorage"
+import "popper"
+import "bootstrap"
+
+ActiveStorage.start()

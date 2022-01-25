@@ -11,27 +11,33 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
+  <div class="mb-3">
+    <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
 
-  <div>
+  <div class="mb-3">
+    <% if recipe.picture.representable? %>
+      <div class="mb-3">
+        <%= image_tag recipe.picture.variant(:medium), class: "img-thumbnail" %>
+      </div>
+    <% end %>
     <%= form.label :picture %>
-    <%= form.file_field :picture, accept:'image/*' %>
+    <%= form.file_field :picture, direct_upload: true, accept:'image/*' %>
   </div>
 
-  <div>
+  <div class="mb-3">
     <%= form.label :ingredients %>
     <%= form.rich_text_area :ingredients %>
   </div>
 
-  <div>
+  <div class="mb-3">
     <%= form.label :directions %>
     <%= form.rich_text_area :directions %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="d-flex justify-content-between align-items-baseline">
+    <%= form.submit nil, class: "btn btn-primary" %>
+    <%= link_to "Cancel", recipes_path, class: "btn btn-outline-danger" %>
   </div>
 <% end %>

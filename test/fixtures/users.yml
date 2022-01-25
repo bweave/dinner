@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: Brian
+  last_name: Weaver
+  email: bdrums@gmail.com
+  password: password
+
+two:
+  first_name: Angie
+  last_name: Weaver
+  email: angiewestin@gmail.com
+  password: password

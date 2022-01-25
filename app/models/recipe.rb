@@ -1,4 +1,6 @@
 class Recipe < ApplicationRecord
+  include ScopedToUser
+
   has_many :dinner_menus, inverse_of: :recipe, dependent: :destroy
   has_many :menus, through: :dinner_menus
 

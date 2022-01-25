@@ -1,4 +1,5 @@
 class MenusController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_menu, only: %i[ show edit update destroy ]
 
   # GET /menus or /menus.json
@@ -12,13 +13,10 @@ class MenusController < ApplicationController
 
   # GET /menus/new
   def new
-    next_week = Menu.order(starts_at: :desc).first_or_initialize(starts_at: Time.current.beginning_of_week).starts_at.next_week
+    latest_menu = Menu.order(starts_at: :desc).first_or_initialize(starts_at: Time.current.next_week)
+    next_week = latest_menu.starts_at.next_week
     random_recipes = RandomRecipesQuery.call
-    @menu = Menu.new(
-      starts_at: next_week,
-      ends_at: next_week.end_of_week,
-      recipes: random_recipes,
-    )
+    @menu = Menu.new(starts_at: next_week, recipes: random_recipes)
   end
 
   # GET /menus/1/edit
@@ -28,6 +26,7 @@ class MenusController < ApplicationController
   # POST /menus or /menus.json
   def create
     @menu = Menu.new(menu_params)
+    @menu.ends_at = @menu.starts_at.end_of_week
 
     respond_to do |format|
       if @menu.save
@@ -43,7 +42,7 @@ class MenusController < ApplicationController
   # PATCH/PUT /menus/1 or /menus/1.json
   def update
     respond_to do |format|
-      if @menu.update(menu_params)
+      if @menu.update(menu_params.merge(ends_at: Time.parse(params[:starts_at]).end_of_week))
         format.html { redirect_to menu_url(@menu), notice: "Menu was successfully updated." }
         format.json { render :show, status: :ok, location: @menu }
       else
@@ -71,10 +70,6 @@ class MenusController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def menu_params
-      params.require(:menu).permit(
-        :starts_at,
-        :ends_at,
-        dinner_menus_attributes: [:id, recipe_attributes: [:id]],
-      )
+      params.require(:menu).permit(:starts_at, dinner_menus_attributes: [:id, recipe_attributes: [:id]])
     end
 end

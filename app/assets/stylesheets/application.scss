@@ -1,0 +1,19 @@
+@import "trix";
+@import "actiontext";
+@import "bootstrap";
+
+// forms
+form:not(.button_to) {
+  label {
+    @extend .form-label;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    @extend .form-control;
+  }
+  [type="submit"] {
+    @extend .btn, .btn-primary;
+  }
+}

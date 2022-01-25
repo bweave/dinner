@@ -1,7 +1,6 @@
-
-<div class="d-flex">
-  <h1>New menu</h1>
-  <%= link_to "Cancel", menus_path %>
+<div class="d-flex justify-content-center">
+  <div>
+    <h1 class="h3">New menu</h1>
+    <%= render "form", menu: @menu %>
+  </div>
 </div>
-
-<%= render "form", menu: @menu %>

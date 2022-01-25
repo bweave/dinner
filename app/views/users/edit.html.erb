@@ -1,0 +1,56 @@
+<h1>Editing user</h1>
+
+<%= form_with model: @user, url: account_path, method: :put do |form| %>
+  <% if @user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :email, "Current Email" %>
+    <%= form.text_field :email, disabled: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :unconfirmed_email, "New Email" %>
+    <%= form.text_field :unconfirmed_email %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :password, "Password (leave blank if you don't want to change it)" %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+
+  <hr/>
+
+  <div class="mb-3">
+    <%= form.label :current_password, "Current password (we need your current password to confirm your changes)" %>
+    <%= form.password_field :current_password, required: true %>
+  </div>
+
+  <div>
+    <%= form.submit "Update Account" %>
+  </div>
+<% end %>

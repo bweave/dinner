@@ -1,9 +1,20 @@
 Rails.application.routes.draw do
+  get 'static_pages/home'
+  resources :users
+  resources :confirmations, only: %i[new create edit], param: :confirmation_token
+  resources :passwords, only: %i[create edit new update], param: :password_reset_token
+  get "sign_up", to: "users#new"
+  post "sign_up", to: "users#create"
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy"
+  get "login", to: "sessions#new"
+  get "account", to: "users#edit"
+  put "account", to: "users#update"
+  delete "account", to: "users#destroy"
+
   resources :menus
   resources :recipes
   resource :suggestions, only: %w[show]
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  root "menus#index"
+  root "static_pages#home"
 end

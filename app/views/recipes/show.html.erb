@@ -1,10 +1,13 @@
-<%= render @recipe %>
-<p><%= @recipe.ingredients %></p>
-<p><%= @recipe.directions %></p>
-
+<div id="<%= dom_id @recipe %>">
+  <% if @recipe.picture.representable? %>
+    <%= image_tag @recipe.picture.variant(:medium), class: "img-thumbnail" %>
+  <% end %>
+  <h1 class="h5"><%= @recipe.name %></h1>
+  <p><%= @recipe.ingredients %></p>
+  <p><%= @recipe.directions %></p>
 <div>
-  <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
-  <%= link_to "Back to recipes", recipes_path %>
 
-  <%= button_to "Destroy this recipe", @recipe, method: :delete %>
+<div class="d-flex">
+  <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-success me-3" %>
+  <%= button_to "Delete", @recipe, method: :delete, class: "btn btn-outline-danger" %>
 </div>

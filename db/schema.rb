@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_29_005923) do
+ActiveRecord::Schema.define(version: 2022_01_25_003110) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -71,10 +71,35 @@ ActiveRecord::Schema.define(version: 2021_12_29_005923) do
     t.datetime "last_suggested_at", precision: 6
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password_digest", null: false
+    t.string "confirmation_token", null: false
+    t.datetime "confirmation_sent_at", precision: 6
+    t.datetime "confirmed_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "password_reset_sent_at", precision: 6
+    t.string "password_reset_token", null: false
+    t.string "unconfirmed_email"
+    t.string "remember_token", null: false
+    t.string "session_token", null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["password_reset_token"], name: "index_users_on_password_reset_token", unique: true
+    t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
+    t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "dinner_menus", "menus"
   add_foreign_key "dinner_menus", "recipes"
+  add_foreign_key "recipes", "users"
 end

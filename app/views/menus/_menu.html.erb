@@ -1,17 +1,18 @@
-<div id="<%= dom_id menu %>">
-    <h2>
-      <%= link_to menu do %>
-        <% if menu.this_week? %>
-          <mark><%= menu.title %></mark>
-        <% else %>
-          <%= menu.title %>
+<div id="<%= dom_id menu %>" class="mb-5">
+  <h5>
+    <%= link_to menu do %>
+      <% if menu.this_week? %>
+        <mark><%= menu.title %></mark>
+      <% else %>
+        <%= menu.title %>
       <% end %>
-    </h2>
-  <% end %>
-
-  <div id="recipes" class="d-flex">
+    <% end %>
+  </h5>
+  <div id="recipes" class="row row-cols-1 row-cols-md-3 g-4">
     <% menu.recipes.each do |recipe| %>
-      <%= render recipe %>
+      <div class="col">
+        <%= render recipe %>
+      </div>
     <% end %>
   </div>
 </div>

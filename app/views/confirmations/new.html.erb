@@ -1,0 +1,10 @@
+<%= form_with model: @user, url: confirmations_path do |form| %>
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.email_field :email, required: true %>
+  </div>
+
+  <div>
+    <%= form.submit "Confirm Email" %>
+  </div>
+<% end %>

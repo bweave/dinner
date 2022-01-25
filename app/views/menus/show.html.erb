@@ -1,8 +1,8 @@
-<%= render @menu %>
+<div class="mb-3">
+  <%= render @menu %>
+</div>
 
-<div>
-  <%= link_to "Edit this menu", edit_menu_path(@menu) %> |
-  <%= link_to "Back to menus", menus_path %>
-
-  <%= button_to "Destroy this menu", @menu, method: :delete %>
+<div class="d-flex">
+  <%= link_to "Edit", edit_menu_path(@menu), class: "btn btn-success me-3" %>
+  <%= button_to "Delete", @menu, method: :delete, class: "btn btn-outline-danger" %>
 </div>
