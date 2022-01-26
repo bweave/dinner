@@ -26,7 +26,6 @@ Rails.application.routes.draw do
 
   resources :menus
   resources :recipes
-  resource :suggestions, only: %w[show]
 
   root "static_pages#home"
 end
