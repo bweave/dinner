@@ -3,7 +3,9 @@
 one:
   name: MyString
   last_suggested_at: 2021-12-22 11:57:33
+  user: one
 
 two:
   name: MyString
   last_suggested_at: 2021-12-22 11:57:33
+  user: one

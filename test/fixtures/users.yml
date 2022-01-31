@@ -4,10 +4,18 @@ one:
   first_name: Brian
   last_name: Weaver
   email: bdrums@gmail.com
-  password: password
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  password_reset_token: password_reset_token_one
+  confirmation_token: confirmation_token_one
+  remember_token: remember_token_one
+  session_token: session_token_one
 
 two:
   first_name: Angie
   last_name: Weaver
   email: angiewestin@gmail.com
-  password: password
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  password_reset_token: password_reset_token_two
+  confirmation_token: confirmation_token_two
+  remember_token: remember_token_two
+  session_token: session_token_two
