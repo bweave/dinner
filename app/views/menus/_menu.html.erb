@@ -1,18 +1,21 @@
-<div id="<%= dom_id menu %>" class="mb-5">
-  <h5>
-    <%= link_to menu do %>
-      <% if menu.this_week? %>
-        <mark><%= menu.title %></mark>
-      <% else %>
-        <%= menu.title %>
+<%= turbo_frame_tag menu do %>
+  <div class="d-flex justify-content-between align-items-baseline">
+    <h2 class="fs-4"><%= menu.title %></h2>
+    <div class="d-flex align-items-center">
+      <%= link_to edit_menu_path(menu), class: "link-success fs-5 me-2" do %>
+        <i class="fa fa-pencil"></i>
       <% end %>
-    <% end %>
-  </h5>
-  <div id="recipes" class="row row-cols-1 row-cols-md-3 g-4">
+      <%= button_to menu, method: :delete, class: "btn btn-link text-danger fs-5", data: {turbo_confirm: "Are you sure?"} do %>
+        <i class="fa fa-trash"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="recipes" class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
     <% menu.recipes.each do |recipe| %>
       <div class="col">
         <%= render recipe %>
       </div>
     <% end %>
   </div>
-</div>
+<% end %>
