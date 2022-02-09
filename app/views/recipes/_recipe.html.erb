@@ -1,8 +1,10 @@
 <div id="<%= dom_id recipe %>" class="card h-100">
   <% if recipe.picture.representable? %>
-    <%= image_tag recipe.picture.variant(:medium), class: "card-img-top" %>
+    <%= link_to recipe, target: "_top" do %>
+      <%= image_tag recipe.picture.variant(:medium), class: "card-img-top" %>
+    <% end %>
   <% end %>
   <div class="card-body">
-    <h5 class="card-title"><%= link_to recipe.name, recipe %></h5>
+    <h5 class="card-title"><%= link_to recipe.name, recipe, target: "_top" %></h5>
   </div>
 </div>
