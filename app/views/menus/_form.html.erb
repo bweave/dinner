@@ -37,13 +37,8 @@
       <% end %>
     </div>
 
-    <div class="d-flex justify-content-between align-items-baseline">
-      <div>
-        <%= form.submit nil, class: "btn btn-primary me-3" %>
-        <% if menu.new_record? %>
-          <%= link_to "Shuffle", new_menu_path, class: "btn btn-outline-success" %>
-        <% end %>
-      </div>
+    <div class="d-flex align-items-baseline">
+      <%= form.submit nil, class: "btn btn-primary me-3" %>
       <%= link_to "Cancel", menus_path, class: "btn btn-outline-danger" %>
     </div>
   <% end %>
