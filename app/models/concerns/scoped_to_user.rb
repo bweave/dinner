@@ -49,7 +49,7 @@ module ScopedToUser
 
     raise "You must set user.current to save #{self} or set user_id" if User.current.blank? && blank_user_id?
 
-    self.user_id = user.current.id if new_record?
+    self.user_id = User.current.id if new_record?
   end
 
   def blank_user_id?
