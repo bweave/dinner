@@ -7,8 +7,6 @@ class Menu < ApplicationRecord
   validate :starts_at_is_a_monday
   validate :ends_at_is_after_starts_at
 
-  accepts_nested_attributes_for :dinner_menus
-
   after_create do
     recipes.touch_all(:last_suggested_at)
   end

@@ -15,12 +15,13 @@ class MenusController < ApplicationController
   def new
     latest_menu = Menu.order(starts_at: :desc).first_or_initialize(starts_at: Time.current.next_week)
     next_week = latest_menu.starts_at.next_week
-    random_recipes = RandomRecipesQuery.call
-    @menu = Menu.new(starts_at: next_week, recipes: random_recipes)
+    @recipes = Recipe.all
+    @menu = Menu.new(starts_at: next_week)
   end
 
   # GET /menus/1/edit
   def edit
+    @recipes = Recipe.all
   end
 
   # POST /menus or /menus.json
@@ -42,8 +43,9 @@ class MenusController < ApplicationController
   # PATCH/PUT /menus/1 or /menus/1.json
   def update
     respond_to do |format|
-      if @menu.update(menu_params.merge(ends_at: Time.parse(params[:starts_at]).end_of_week))
-        format.html { redirect_to menu_url(@menu), notice: "Menu was successfully updated." }
+      ends_at = Time.parse(menu_params[:starts_at]).end_of_week
+      if @menu.update(menu_params.merge(ends_at: ends_at))
+        format.html { redirect_to menus_url }
         format.json { render :show, status: :ok, location: @menu }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -70,6 +72,6 @@ class MenusController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def menu_params
-      params.require(:menu).permit(:starts_at, dinner_menus_attributes: [:id, recipe_attributes: [:id]])
+      params.require(:menu).permit(:starts_at, recipe_ids: [])
     end
 end

@@ -18,12 +18,22 @@
     </div>
 
     <div id="recipes" class="row mb-3">
-      <%= form.fields_for :dinner_menus do |dmf| %>
-        <%= dmf.fields_for :recipe do |recipe_fields| %>
-          <div class="col">
-            <%= render recipe_fields.object %>
+      <%= form.collection_check_boxes(:recipe_ids, @recipes, :id, :name) do |b| %>
+        <div class="col">
+          <div class="card h-100">
+            <% if b.object.picture.representable? %>
+              <%= image_tag b.object.picture.variant(:thumb), class: "card-img-top" %>
+            <% end %>
+            <div class="card-body">
+              <div class="form-check">
+                <%= b.check_box class: "form-check-input" %>
+                <%= b.label class: "form-check-label" do %>
+                  <%= b.object.name %>
+                <% end %>
+              </div>
+            </div>
           </div>
-        <% end %>
+        </div>
       <% end %>
     </div>
 
