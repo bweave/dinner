@@ -3,7 +3,12 @@ class MenusController < ApplicationController
   before_action :set_menu, only: %i[ show edit update destroy ]
 
   def index
-    @menus = Menu.includes(:recipes).order(:starts_at).limit(10)
+    starts_at, direction = if params[:past_menus]
+                         [[..Time.current.beginning_of_week], :desc]
+                       else
+                         [[Time.current.beginning_of_week..], :asc]
+                       end
+    @menus = Menu.where(starts_at: starts_at).includes(:recipes).order(starts_at: direction).limit(10)
   end
 
   def show
