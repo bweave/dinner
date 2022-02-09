@@ -1,11 +1,24 @@
-<div class="d-flex justify-content-end mb-3">
-  <%= link_to "New recipe", new_recipe_path, class: "btn btn-primary" %>
-</div>
-
-<div id="recipes" class="row row-cols-1 row-cols-md-3 g-4">
-  <% @recipes.each do |recipe| %>
-    <div class="col">
-      <%= render recipe %>
+<div id="recipes">
+  <% if @recipes.present? %>
+    <div class="d-flex justify-content-end mb-3">
+      <%= link_to new_recipe_path, class: "btn btn-primary" do %>
+        <i class="fa fa-plus"></i>
+        New recipe
+      <% end %>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+      <% @recipes.each do |recipe| %>
+        <div class="col">
+          <%= render recipe %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="p-5 my-5 bg-light rounded-3 text-center">
+      <div class="container-fluid py-5">
+        <h3 class="text-muted">Uh oh! You don't have any recipes, yet.</h3>
+        <%= link_to "Get started", new_recipe_path, class: "btn btn-primary me-3" %>
+      </div>
     </div>
   <% end %>
 </div>
