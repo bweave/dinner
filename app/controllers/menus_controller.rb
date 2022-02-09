@@ -4,7 +4,7 @@ class MenusController < ApplicationController
 
   # GET /menus or /menus.json
   def index
-    @menus = Menu.includes(:recipes).order(starts_at: :desc).limit(3)
+    @menus = Menu.includes(:recipes).order(:starts_at).limit(10)
   end
 
   # GET /menus/1 or /menus/1.json
