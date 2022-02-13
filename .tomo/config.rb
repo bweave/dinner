@@ -36,6 +36,7 @@ set linked_dirs: %w[
   log
   public/assets
   public/packs
+  storage
   tmp/cache
   tmp/pids
   tmp/sockets
