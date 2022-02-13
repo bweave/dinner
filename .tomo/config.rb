@@ -7,6 +7,7 @@ plugin "rails"
 plugin "puma"
 plugin "rbenv"
 plugin "./plugins/nginx.rb"
+plugin "sidekiq"
 
 host "dinner_deployer@rpi4"
 
@@ -57,6 +58,7 @@ setup do
   run "rails:db_seed"
   run "puma:setup_systemd"
   run "nginx:configure"
+  run "sidekiq:setup_systemd"
 end
 
 deploy do
@@ -69,6 +71,7 @@ deploy do
   run "rails:db_seed"
   run "rails:assets_precompile"
   run "core:symlink_current"
+  run "sidekiq:restart"
   run "puma:restart"
   run "puma:check_active"
   run "core:clean_releases"

@@ -32,8 +32,10 @@ end
 
 group :development do
   gem "foreman"
-  gem "web-console"
   gem "solargraph"
+  gem "tomo"
+  gem "tomo-plugin-sidekiq"
+  gem "web-console"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"

@@ -250,6 +250,9 @@ GEM
       railties (>= 6.0.0)
     thor (1.1.0)
     tilt (2.0.10)
+    tomo (1.10.0)
+    tomo-plugin-sidekiq (1.1.1)
+      tomo (~> 1.0)
     turbo-rails (1.0.0)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -302,6 +305,8 @@ DEPENDENCIES
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
+  tomo
+  tomo-plugin-sidekiq
   turbo-rails
   tzinfo-data
   web-console
