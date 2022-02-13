@@ -29,7 +29,8 @@ set env_vars: {
   RAILS_SERVE_STATIC_FILES: "1",
   BOOTSNAP_CACHE_DIR: "tmp/bootsnap-cache",
   DATABASE_URL: :prompt,
-  SECRET_KEY_BASE: :prompt
+  SECRET_KEY_BASE: :prompt,
+  RAILS_MASTER_KEY: :prompt,
 }
 set linked_dirs: %w[
   log
