@@ -37,7 +37,7 @@ class UsersController < ApplicationController
           @user.send_confirmation_email!
           redirect_to root_path, notice: "Check your email for confirmation instructions."
         else
-          redirect_to root_path, notice: "Account updated."
+          redirect_to edit_user_path(current_user), notice: "Account updated."
         end
       else
         render :edit, status: :unprocessable_entity
@@ -65,6 +65,6 @@ class UsersController < ApplicationController
   end
 
   def update_user_params
-    params.require(:user).permit(:current_password, :password, :password_confirmation, :unconfirmed_email, household_attributes: [:name])
+    params.require(:user).permit(:first_name, :last_name, :current_password, :password, :password_confirmation, :unconfirmed_email, household_attributes: [:name])
   end
 end
