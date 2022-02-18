@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_25_130228) do
+ActiveRecord::Schema.define(version: 2022_02_18_155933) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -55,8 +55,16 @@ ActiveRecord::Schema.define(version: 2022_01_25_130228) do
     t.integer "menu_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "household_id", null: false
+    t.index ["household_id"], name: "index_dinner_menus_on_household_id"
     t.index ["menu_id"], name: "index_dinner_menus_on_menu_id"
     t.index ["recipe_id"], name: "index_dinner_menus_on_recipe_id"
+  end
+
+  create_table "households", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "menus", force: :cascade do |t|
@@ -64,6 +72,8 @@ ActiveRecord::Schema.define(version: 2022_01_25_130228) do
     t.datetime "ends_at", precision: 6
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "household_id", null: false
+    t.index ["household_id"], name: "index_menus_on_household_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -71,8 +81,8 @@ ActiveRecord::Schema.define(version: 2022_01_25_130228) do
     t.datetime "last_suggested_at", precision: 6
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id", null: false
-    t.index ["user_id"], name: "index_recipes_on_user_id"
+    t.integer "household_id", null: false
+    t.index ["household_id"], name: "index_recipes_on_household_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -91,8 +101,10 @@ ActiveRecord::Schema.define(version: 2022_01_25_130228) do
     t.string "remember_token", null: false
     t.string "session_token", null: false
     t.boolean "admin", default: false
+    t.integer "household_id", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["household_id"], name: "index_users_on_household_id"
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token", unique: true
     t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
@@ -100,7 +112,10 @@ ActiveRecord::Schema.define(version: 2022_01_25_130228) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "dinner_menus", "households"
   add_foreign_key "dinner_menus", "menus"
   add_foreign_key "dinner_menus", "recipes"
-  add_foreign_key "recipes", "users"
+  add_foreign_key "menus", "households"
+  add_foreign_key "recipes", "households"
+  add_foreign_key "users", "households"
 end

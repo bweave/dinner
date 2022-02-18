@@ -1,4 +1,6 @@
 class Menu < ApplicationRecord
+  include ScopedToHousehold
+
   has_many :dinner_menus, inverse_of: :menu, dependent: :destroy
   has_many :recipes, through: :dinner_menus
 

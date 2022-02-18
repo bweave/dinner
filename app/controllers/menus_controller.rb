@@ -68,6 +68,6 @@ class MenusController < ApplicationController
     end
 
     def menu_params
-      params.require(:menu).permit(:starts_at, recipe_ids: [])
+      params.require(:menu).permit(:household_id, :starts_at, recipe_ids: [])
     end
 end

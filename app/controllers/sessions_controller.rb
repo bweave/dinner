@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.authenticate_by(email: params[:user][:email].downcase, password: params[:user][:password])
+    @user = User.unscoped.authenticate_by(email: params[:user][:email].downcase, password: params[:user][:password])
 
     if @user
       if @user.unconfirmed?
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         after_login_path = session[:user_return_to] || menus_path
         login @user
         remember(@user) if params[:user][:remember_me] == "1"
-        redirect_to after_login_path, notice: "Signed in."
+        redirect_to after_login_path
       end
     else
       flash.now[:alert] = "Incorrect email or password."
@@ -26,6 +26,6 @@ class SessionsController < ApplicationController
   def destroy
     forget(current_user)
     logout
-    redirect_to root_path, notice: "Signed out."
+    redirect_to root_path
   end
 end

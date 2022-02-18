@@ -11,6 +11,13 @@
     </div>
   <% end %>
 
+  <%= form.fields_for :household do |household_fields| %>
+    <div class="mb-3">
+      <%= household_fields.label :name, "Household name" %>
+      <%= household_fields.text_field :name %>
+    </div>
+  <% end %>
+
   <div class="mb-3">
     <%= form.label :first_name %>
     <%= form.text_field :first_name %>

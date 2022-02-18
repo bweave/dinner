@@ -1,7 +1,11 @@
 class User < ApplicationRecord
+  include ScopedToHousehold
+
   CONFIRMATION_TOKEN_EXPIRATION_IN_SECONDS = 10.minutes.to_i
   MAILER_FROM_EMAIL = "howdy@bweave.dev"
   PASSWORD_RESET_TOKEN_EXPIRATION_IN_SECONDS = 10.minutes.to_i
+
+  accepts_nested_attributes_for :household
 
   attr_accessor :current_password
 
