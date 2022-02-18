@@ -1,6 +1,7 @@
 class Menu < ApplicationRecord
   include ScopedToHousehold
 
+  belongs_to :created_by, class_name: "User", foreign_key: "created_by_id"
   has_many :dinner_menus, inverse_of: :menu, dependent: :destroy
   has_many :recipes, through: :dinner_menus
 

@@ -18,7 +18,7 @@ class MenusController < ApplicationController
     latest_menu = Menu.order(starts_at: :desc).first_or_initialize(starts_at: Time.current.next_week)
     next_week = latest_menu.starts_at.next_week
     @recipes = Recipe.all
-    @menu = Menu.new(starts_at: next_week)
+    @menu = Menu.new(created_by: User.current, starts_at: next_week)
   end
 
   def edit
@@ -68,6 +68,6 @@ class MenusController < ApplicationController
     end
 
     def menu_params
-      params.require(:menu).permit(:household_id, :starts_at, recipe_ids: [])
+      params.require(:menu).permit(:created_by_id, :household_id, :starts_at, recipe_ids: [])
     end
 end
