@@ -5,6 +5,7 @@ module Authentication
     before_action :current_user
     before_action :current_household
     helper_method :current_user
+    helper_method :current_household
     helper_method :user_signed_in?
   end
 

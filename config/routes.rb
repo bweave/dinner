@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq", :constraints => AdminConstraint.new
 
   get "static_pages/home"
+  resources :households, only: %i[show edit update] #=> TODO: destroy + index, new, create for admins
   resources :users
   resources :confirmations, only: %i[new create edit], param: :confirmation_token
   resources :passwords, only: %i[create edit new update], param: :password_reset_token

@@ -22,6 +22,7 @@
               <% end %>
               <div id="nav-account-dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown">
                 <%= link_to "Profile", edit_user_path(current_user), class: "dropdown-item" %>
+                <%= link_to "Household", household_path(current_household), class: "dropdown-item" %>
                 <%# <% if current_user.admin? && respond_to?(:madmin_root_path) %1> %>
                   <%#   <div class="dropdown-divider"></div> %>
                   <%#   <%= link_to "Admin Area", madmin_root_path, class: "dropdown-item" %1> %>
