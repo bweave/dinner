@@ -7,10 +7,12 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # Admin user
-User.find_or_create_by(email: "bdrums@gmail.com") do |user|
-  user.admin = true
-  user.confirmed_at = Time.current
-  user.first_name = "Brian"
-  user.last_name = "Weaver"
-  user.password_digest = BCrypt::Password.create(Rails.application.credentials.admin[:password])
+ScopedToHousehold.ignore do
+  User.find_or_create_by(email: "bdrums@gmail.com") do |user|
+    user.admin = true
+    user.confirmed_at = Time.current
+    user.first_name = "Brian"
+    user.last_name = "Weaver"
+    user.password_digest = BCrypt::Password.create(Rails.application.credentials.admin[:password])
+  end
 end
