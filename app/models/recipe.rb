@@ -2,6 +2,7 @@ class Recipe < ApplicationRecord
   include ScopedToHousehold
 
   belongs_to :created_by, class_name: "User", foreign_key: "created_by_id"
+  belongs_to :edited_by, class_name: "User", foreign_key: "edited_by_id"
   has_many :dinner_menus, inverse_of: :recipe, dependent: :destroy
   has_many :menus, through: :dinner_menus
 

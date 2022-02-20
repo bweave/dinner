@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_18_233625) do
+ActiveRecord::Schema.define(version: 2022_02_20_170233) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -85,7 +85,9 @@ ActiveRecord::Schema.define(version: 2022_02_18_233625) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "household_id", null: false
     t.integer "created_by_id", null: false
+    t.integer "edited_by_id", null: false
     t.index ["created_by_id"], name: "index_recipes_on_created_by_id"
+    t.index ["edited_by_id"], name: "index_recipes_on_edited_by_id"
     t.index ["household_id"], name: "index_recipes_on_household_id"
   end
 
@@ -123,5 +125,6 @@ ActiveRecord::Schema.define(version: 2022_02_18_233625) do
   add_foreign_key "menus", "users", column: "created_by_id"
   add_foreign_key "recipes", "households"
   add_foreign_key "recipes", "users", column: "created_by_id"
+  add_foreign_key "recipes", "users", column: "edited_by_id"
   add_foreign_key "users", "households"
 end

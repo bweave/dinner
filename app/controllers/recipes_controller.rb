@@ -10,10 +10,11 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @recipe = Recipe.new(created_by: User.current)
+    @recipe = Recipe.new(created_by: User.current, edited_by: User.current)
   end
 
   def edit
+    @recipe.edited_by = User.current
   end
 
   def create
