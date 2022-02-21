@@ -8,8 +8,9 @@
       <%= form.email_field :email, required: true %>
     </div>
 
-    <div>
-      <%= form.submit "Send invitation" %>
+    <div class="d-flex">
+      <%= form.submit "Send invitation", class: "me-3" %>
+      <%= link_to "Cancel", household_path(Household.current), class: "btn btn-outline-danger" %>
     </div>
   <% end %>
 <% end %>
