@@ -2,11 +2,11 @@ class ConfirmationsController < ApplicationController
   before_action :redirect_if_authenticated, only: %i[create new]
 
   def new
-    @user = User.new
+    @user = User.unscoped.new
   end
 
   def create
-    @user = User.find_by(email: params[:user][:email].downcase)
+    @user = User.unscoped.find_by(email: params[:user][:email].downcase)
 
     if @user.present? && @user.confirmation_token_is_valid?
       if @user.confirm!
@@ -21,7 +21,7 @@ class ConfirmationsController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(confirmation_token: params[:confirmation_token])
+    @user = User.unscoped.find_by(confirmation_token: params[:confirmation_token])
 
     if @user.present? && @user.unconfirmed_or_reconfirming? && @user.confirmation_token_is_valid?
       @user.confirm!
