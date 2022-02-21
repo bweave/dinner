@@ -24,5 +24,11 @@
         <% end %>
       </tbody>
     </table>
+    <%= turbo_frame_tag :new_invitation do %>
+      <%= link_to new_invitation_path, class: "btn btn-primary" do %>
+        <i class="fa fa-plus"></i>
+        Invite member
+      <% end %>
+    <% end %>
   </div>
 </div>

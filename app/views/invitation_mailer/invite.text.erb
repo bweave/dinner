@@ -1,0 +1,5 @@
+# Hi there!
+
+You've been invited by <%= @invited_by.name %> to join their household, <%= @household.name %> on the Dinner app.
+
+<%= link_to "Click here to get started.", edit_invitation_url(@invitation.token) %>

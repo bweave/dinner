@@ -3,7 +3,7 @@ require "sidekiq/web"
 class AdminConstraint
   def matches?(request)
     return false unless request.session[:current_user_session_token].present?
-    user = User.find_by(session_token: request.session[:current_user_session_token])
+    user = User.unscoped.find_by(session_token: request.session[:current_user_session_token])
     user && user.admin?
   end
 end
@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "static_pages/home"
   resources :households, only: %i[show edit update] #=> TODO: destroy + index, new, create for admins
   resources :users
+  resources :invitations, only: %i[new create edit update], param: :token
   resources :confirmations, only: %i[new create edit], param: :confirmation_token
   resources :passwords, only: %i[create edit new update], param: :password_reset_token
   get "sign_up", to: "users#new"

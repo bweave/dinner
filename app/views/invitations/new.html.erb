@@ -1,0 +1,15 @@
+<%= turbo_frame_tag :new_invitation do %>
+  <%= form_with model: @invitation, url: invitations_path do |form| %>
+    <%= form.hidden_field :created_by_id %>
+    <%= form.hidden_field :household_id %>
+
+    <div class="mb-3">
+      <%= form.label :email %>
+      <%= form.email_field :email, required: true %>
+    </div>
+
+    <div>
+      <%= form.submit "Send invitation" %>
+    </div>
+  <% end %>
+<% end %>

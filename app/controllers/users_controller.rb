@@ -16,9 +16,6 @@ class UsersController < ApplicationController
     @user.build_household
   end
 
-  def edit
-  end
-
   def create
     @user = User.new(create_user_params)
 
@@ -30,7 +27,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
+    # TODO: does this work? 😆
     if @user.authenticate(params[:user][:current_password])
       if @user.update(update_user_params)
         if params[:user][:unconfirmed_email].present?

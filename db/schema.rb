@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_20_170809) do
+ActiveRecord::Schema.define(version: 2022_02_20_171342) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -65,6 +65,22 @@ ActiveRecord::Schema.define(version: 2022_02_20_170809) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.integer "household_id", null: false
+    t.integer "user_id"
+    t.string "email", null: false
+    t.datetime "sent_at"
+    t.datetime "accepted_at"
+    t.string "token", null: false
+    t.integer "created_by_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_invitations_on_created_by_id"
+    t.index ["household_id"], name: "index_invitations_on_household_id"
+    t.index ["token"], name: "index_invitations_on_token", unique: true
+    t.index ["user_id"], name: "index_invitations_on_user_id"
   end
 
   create_table "menus", force: :cascade do |t|
@@ -123,6 +139,9 @@ ActiveRecord::Schema.define(version: 2022_02_20_170809) do
   add_foreign_key "dinner_menus", "households"
   add_foreign_key "dinner_menus", "menus"
   add_foreign_key "dinner_menus", "recipes"
+  add_foreign_key "invitations", "households"
+  add_foreign_key "invitations", "users"
+  add_foreign_key "invitations", "users", column: "created_by_id"
   add_foreign_key "menus", "households"
   add_foreign_key "menus", "users", column: "created_by_id"
   add_foreign_key "menus", "users", column: "edited_by_id"

@@ -5,8 +5,9 @@ class User < ApplicationRecord
   MAILER_FROM_EMAIL = "howdy@bweave.dev"
   PASSWORD_RESET_TOKEN_EXPIRATION_IN_SECONDS = 10.minutes.to_i
 
-  has_many :recipes, class_name: "Recipe", foreign_key: "created_by_id", dependent: :destroy
-  has_many :menus, class_name: "Menu", foreign_key: "created_by_id", dependent: :destroy
+  has_many :recipes, foreign_key: "created_by_id", dependent: :destroy
+  has_many :menus, foreign_key: "created_by_id", dependent: :destroy
+  has_many :invitations, foreign_key: "created_by_id", dependent: :destroy
 
   accepts_nested_attributes_for :household
 
@@ -26,6 +27,10 @@ class User < ApplicationRecord
 
   def self.current
     Current.user
+  end
+
+  def self.current=(user)
+    Current.user = user
   end
 
   # TODO: this will be in Rails 7.1, remove it after upgrading
