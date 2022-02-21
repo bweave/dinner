@@ -8,26 +8,41 @@
         <% end %>
       </div>
     <% end %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @household.users.each_with_index do |user, i| %>
+    <% if @household.users.excluding(current_user).present? %>
+      <table class="table">
+        <thead>
           <tr>
-            <th scope="row"><%= i + 1 %></th>
-            <td><%= user.name %></td>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Manage</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @household.users.excluding(current_user).each_with_index do |user, i| %>
+            <tr>
+              <th scope="row"><%= i + 1 %></th>
+              <td><%= user.name %></td>
+              <td>
+                <%= button_to user_path(user), method: :delete, class: "btn btn-link text-danger" do %>
+                  <i class="fa fa-trash"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="p-5 my-5 bg-light rounded-3 text-center">
+        <div class="container-fluid py-5">
+          <h3 class="text-muted">Looks like it's just you right now.</h3>
+          <p class="lead">Feel free to add members to your household.</p>
+        </div>
+      </div>
+    <% end %>
     <%= turbo_frame_tag :new_invitation do %>
       <%= link_to new_invitation_path, class: "btn btn-primary" do %>
         <i class="fa fa-plus"></i>
-        Invite member
+        Invite a member
       <% end %>
     <% end %>
   </div>
