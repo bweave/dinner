@@ -23,7 +23,7 @@ class HouseholdsController < ApplicationController
   private
 
   def set_household
-    @household = Household.includes(:users).find(params[:id])
+    @household = Household.includes(:users).find(Household.current.id)
   end
 
   def household_params
