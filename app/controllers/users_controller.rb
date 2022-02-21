@@ -50,15 +50,20 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    current_user.destroy
-    reset_session
-    redirect_to root_path, notice: "Your account has been deleted."
+    if @user == current_user
+      current_user.destroy
+      reset_session
+      redirect_to root_path, notice: "Your account has been deleted."
+    else
+      @user.destroy
+      redirect_back(fallback_location: household_path(Household.current))
+    end
   end
 
   private
 
   def set_user
-    @user = current_user
+    @user = User.find_by(id: params[:id]) || current_user
   end
 
   def create_user_params
