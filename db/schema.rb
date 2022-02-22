@@ -148,5 +148,5 @@ ActiveRecord::Schema.define(version: 2022_02_20_171342) do
   add_foreign_key "recipes", "households"
   add_foreign_key "recipes", "users", column: "created_by_id", on_delete: :cascade
   add_foreign_key "recipes", "users", column: "edited_by_id", on_delete: :cascade
-  add_foreign_key "users", "households"
+  add_foreign_key "users", "households", on_delete: :cascade
 end

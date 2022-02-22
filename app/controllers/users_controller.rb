@@ -31,7 +31,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    # TODO: does this work? 😆
     if @user.authenticate(params[:user][:current_password])
       if @user.update(update_user_params)
         if params[:user][:unconfirmed_email].present?

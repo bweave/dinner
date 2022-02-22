@@ -1,4 +1,4 @@
-<h1>Editing user</h1>
+<h1>Profile</h1>
 
 <%= form_with model: @user, url: account_path, method: :put do |form| %>
   <% if @user.errors.any? %>
@@ -51,6 +51,13 @@
   </div>
 
   <div>
-    <%= form.submit "Update Account" %>
+    <%= form.submit "Update profile" %>
   </div>
 <% end %>
+
+<hr>
+
+<div class="mb-3">
+  <p>Need to delete your account?</p>
+  <%= button_to "Delete account", user_path(@user), method: :delete, class: "btn btn-outline-danger" %>
+</div>

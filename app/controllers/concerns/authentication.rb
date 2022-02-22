@@ -55,7 +55,7 @@ module Authentication
   end
 
   def current_household
-    Current.household = current_user&.household
+    Current.household ||= current_user&.household
   end
 
   def user_signed_in?
