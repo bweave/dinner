@@ -50,13 +50,16 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @user == current_user
-      current_user.destroy
-      reset_session
-      redirect_to root_path, notice: "Your account has been deleted."
-    else
+    respond_to do |format|
       @user.destroy
-      redirect_back(fallback_location: household_path(Household.current))
+      if @user == current_user
+        reset_session
+        format.html { redirect_to root_path, notice: "Your account has been deleted." }
+      else
+        flash.now[:success] = "#{@user.name} has been removed."
+        format.turbo_stream
+        format.html { redirect_back(fallback_location: household_path(Household.current)) }
+      end
     end
   end
 

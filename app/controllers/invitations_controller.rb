@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[new create]
 
   def new
     @invitation = Invitation.new(household: Household.current, created_by: User.current)
@@ -21,7 +21,8 @@ class InvitationsController < ApplicationController
   end
 
   def edit
-    @invitation = Invitation.find_by(token: params[:token])
+    @invitation = Invitation.unscoped.find_by(token: params[:token])
+    Household.current = @invitation.household
 
     if @invitation.blank?
       redirect_to root_path, alert: "Invalid invitation" 
@@ -33,7 +34,8 @@ class InvitationsController < ApplicationController
   end
 
   def update
-    @invitation = Invitation.find_by(token: update_invitation_params.delete(:token))
+    @invitation = Invitation.unscoped.find_by(token: update_invitation_params.delete(:token))
+    Household.current = @invitation.household
     
     if @invitation.update(update_invitation_params.merge(accepted_at: Time.current))
       @invitation.user.send_confirmation_email!

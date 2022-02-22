@@ -7,7 +7,7 @@ class CreateInvitations < ActiveRecord::Migration[7.0]
       t.timestamp :sent_at
       t.timestamp :accepted_at
       t.string :token, null: false
-      t.references :created_by, null: false, foreign_key: {to_table: :users}
+      t.references :created_by, null: false, foreign_key: {to_table: :users, on_delete: :cascade}
 
       t.timestamps
     end

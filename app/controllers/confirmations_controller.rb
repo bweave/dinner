@@ -11,7 +11,7 @@ class ConfirmationsController < ApplicationController
     if @user.present? && @user.confirmation_token_is_valid?
       if @user.confirm!
         login @user
-        redirect_to menus_path, notice: "Your account has been confirmed."
+        redirect_to menus_path, success: "Your account has been confirmed."
       else
         redirect_to new_confirmation_path, alert: "Something went wrong."
       end
@@ -26,7 +26,7 @@ class ConfirmationsController < ApplicationController
     if @user.present? && @user.unconfirmed_or_reconfirming? && @user.confirmation_token_is_valid?
       @user.confirm!
       login @user
-      redirect_to menus_path, notice: "Your account has been confirmed."
+      redirect_to menus_path, success: "Your account has been confirmed."
     else
       redirect_to new_confirmation_path, alert: "Invalid token."
     end

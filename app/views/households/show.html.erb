@@ -9,28 +9,18 @@
       </div>
     <% end %>
     <% if @household.users.excluding(current_user).present? %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Manage</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @household.users.excluding(current_user).each_with_index do |user, i| %>
-            <tr>
-              <th scope="row"><%= i + 1 %></th>
-              <td><%= user.name %></td>
-              <td>
-                <%= button_to user_path(user), method: :delete, class: "btn btn-link text-danger" do %>
-                  <i class="fa fa-trash"></i>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <ol class="list-group list-group-numbered mb-3">
+        <% @household.users.excluding(current_user).each_with_index do |user, i| %>
+          <li id="<%= dom_id(user) %>" class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="ms-2 me-auto">
+              <%= user.name %>
+            </div>
+            <%= button_to user_path(user), method: :delete, class: "btn btn-link text-danger" do %>
+              <i class="fa fa-trash"></i>
+            <% end %>
+          </li>
+        <% end %>
+      </ol>
     <% else %>
       <div class="p-5 my-5 bg-light rounded-3 text-center">
         <div class="container-fluid py-5">
