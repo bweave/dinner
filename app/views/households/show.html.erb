@@ -40,10 +40,7 @@
       </div>
     <% end %>
     <%= turbo_frame_tag :new_invitation do %>
-      <%= link_to new_invitation_path, class: "btn btn-primary" do %>
-        <i class="fa fa-plus"></i>
-        Invite a member
-      <% end %>
+      <%= render "new_invitation" %>
     <% end %>
   </div>
 </div>

@@ -8,11 +8,15 @@ class InvitationsController < ApplicationController
   def create
     @invitation = Invitation.new(invitation_params)
 
-    if @invitation.save
-      @invitation.send_invitation_email
-      redirect_to household_path(@invitation.household), notice: "Invitation sent!"
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @invitation.save
+        @invitation.send_invitation_email
+        flash.now[:success] = "Invitation sent to #{@invitation.email}."
+        format.turbo_stream
+        format.html { redirect_to household_path(@invitation.household) }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -1,5 +1,17 @@
 <%= turbo_frame_tag :new_invitation do %>
   <%= form_with model: @invitation, url: invitations_path do |form| %>
+    <% if @invitation.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@invitation.errors.count, "error") %> prohibited this invitation from being sent:</h2>
+
+        <ul>
+          <% @invitation.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <%= form.hidden_field :created_by_id %>
     <%= form.hidden_field :household_id %>
 
