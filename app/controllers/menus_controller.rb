@@ -69,6 +69,6 @@ class MenusController < ApplicationController
     end
 
     def menu_params
-      params.require(:menu).permit(:created_by_id, :household_id, :starts_at, recipe_ids: [])
+      params.require(:menu).permit(:created_by_id, :edited_by_id, :household_id, :starts_at, recipe_ids: [])
     end
 end

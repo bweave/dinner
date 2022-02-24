@@ -1,11 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  last_suggested_at: 2021-12-22 11:57:33
-  user: one
+tacos:
+  name: Tacos
+  last_suggested_at: <%= 1.week.ago %>
+  household: weavers
+  created_by: brian
+  edited_by: brian
 
-two:
-  name: MyString
-  last_suggested_at: 2021-12-22 11:57:33
-  user: one
+pizza:
+  name: Pizza
+  last_suggested_at: <%= 1.week.ago %>
+  household: weavers
+  created_by: brian
+  edited_by: brian
+
+burgers:
+  name: Burgers
+  last_suggested_at: <%= 1.week.ago %>
+  household: weavers
+  created_by: angie
+  edited_by: angie

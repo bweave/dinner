@@ -1,21 +1,25 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+brian:
   first_name: Brian
   last_name: Weaver
   email: bdrums@gmail.com
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
   password_reset_token: password_reset_token_one
   confirmation_token: confirmation_token_one
+  confirmed_at: <%= 1.minute.ago %>
   remember_token: remember_token_one
   session_token: session_token_one
+  household: weavers
 
-two:
+angie:
   first_name: Angie
   last_name: Weaver
   email: angiewestin@gmail.com
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
   password_reset_token: password_reset_token_two
   confirmation_token: confirmation_token_two
+  confirmed_at: <%= 1.minute.ago %>
   remember_token: remember_token_two
   session_token: session_token_two
+  household: weavers

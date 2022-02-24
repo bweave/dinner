@@ -1,9 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  recipe: one
-  menu: one
+last_week_burgers:
+  recipe: burgers
+  menu: last_week
+  household: weavers
 
-two:
-  recipe: two
-  menu: two
+this_week_tacos:
+  recipe: tacos
+  menu: this_week
+  household: weavers
+
+next_week_pizza:
+  recipe: pizza
+  menu: next_week
+  household: weavers

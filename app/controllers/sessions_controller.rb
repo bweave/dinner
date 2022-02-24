@@ -15,11 +15,12 @@ class SessionsController < ApplicationController
         after_login_path = session[:user_return_to] || menus_path
         login @user
         remember(@user) if params[:user][:remember_me] == "1"
-        redirect_to after_login_path
+        flash[:success] = "Logged in."
+        redirect_to after_login_path 
       end
     else
       flash.now[:alert] = "Incorrect email or password."
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

@@ -2,38 +2,37 @@ require "application_system_test_case"
 
 class MenusTest < ApplicationSystemTestCase
   setup do
-    @menu = menus(:one)
+    login users(:brian)
+    @menu = menus(:this_week)
   end
 
   test "visiting the index" do
     visit menus_url
-    assert_selector "h1", text: "Menus"
+    assert_selector "h2", text: @menu.title
   end
 
   test "should create menu" do
     visit menus_url
+    refute_selector "h5", text: "Burgers"
     click_on "New menu"
-
+    check "Burgers"
     click_on "Create Menu"
-
-    assert_text "Menu was successfully created"
-    click_on "Back"
+    assert_selector "h5", text: "Burgers"
   end
 
   test "should update Menu" do
     visit menu_url(@menu)
-    click_on "Edit this menu", match: :first
-
+    assert_selector "h5", text: "Tacos"
+    click_link "Edit this menu", match: :first
+    uncheck "Tacos"
     click_on "Update Menu"
-
-    assert_text "Menu was successfully updated"
-    click_on "Back"
+    refute_selector "h5", text: "Tacos"
   end
 
   test "should destroy Menu" do
     visit menu_url(@menu)
-    click_on "Destroy this menu", match: :first
-
-    assert_text "Menu was successfully destroyed"
+    assert_selector "h5", text: "Tacos"
+    click_button "Delete this menu", match: :first
+    refute_selector "h5", text: "Tacos"
   end
 end
