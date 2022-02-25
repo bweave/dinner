@@ -2,42 +2,36 @@ require "application_system_test_case"
 
 class RecipesTest < ApplicationSystemTestCase
   setup do
+    login users(:brian)
     @recipe = recipes(:tacos)
   end
 
   test "visiting the index" do
     visit recipes_url
-    assert_selector "h1", text: "Recipes"
+    assert_selector "h5", text: @recipe.name
   end
 
   test "should create recipe" do
     visit recipes_url
+    refute_selector "h5", text: "Sandwiches"
     click_on "New recipe"
-
-    fill_in "Last suggested at", with: @recipe.last_suggested_at
-    fill_in "Name", with: @recipe.name
+    fill_in "Name", with: "Sandwiches"
     click_on "Create Recipe"
-
-    assert_text "Recipe was successfully created"
-    click_on "Back"
+    assert_selector "h1", text: "Sandwiches"
   end
 
   test "should update Recipe" do
     visit recipe_url(@recipe)
-    click_on "Edit this recipe", match: :first
-
-    fill_in "Last suggested at", with: @recipe.last_suggested_at
-    fill_in "Name", with: @recipe.name
+    assert_selector "h1", text: @recipe.name
+    click_link "Edit"
+    fill_in "Name", with: "Sandwiches"
     click_on "Update Recipe"
-
-    assert_text "Recipe was successfully updated"
-    click_on "Back"
+    assert_selector "h1", text: "Sandwiches"
   end
 
   test "should destroy Recipe" do
     visit recipe_url(@recipe)
-    click_on "Destroy this recipe", match: :first
-
-    assert_text "Recipe was successfully destroyed"
+    click_on "Delete"
+    refute_text @recipe.name
   end
 end
