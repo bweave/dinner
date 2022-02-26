@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2022_02_20_171342) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "household_id", null: false
-    t.integer "created_by_id", null: false
+    t.integer "created_by_id"
     t.integer "edited_by_id", null: false
     t.index ["created_by_id"], name: "index_menus_on_created_by_id"
     t.index ["edited_by_id"], name: "index_menus_on_edited_by_id"
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 2022_02_20_171342) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "household_id", null: false
-    t.integer "created_by_id", null: false
+    t.integer "created_by_id"
     t.integer "edited_by_id", null: false
     t.index ["created_by_id"], name: "index_recipes_on_created_by_id"
     t.index ["edited_by_id"], name: "index_recipes_on_edited_by_id"
@@ -143,10 +143,6 @@ ActiveRecord::Schema.define(version: 2022_02_20_171342) do
   add_foreign_key "invitations", "users"
   add_foreign_key "invitations", "users", column: "created_by_id", on_delete: :cascade
   add_foreign_key "menus", "households"
-  add_foreign_key "menus", "users", column: "created_by_id", on_delete: :cascade
-  add_foreign_key "menus", "users", column: "edited_by_id", on_delete: :cascade
   add_foreign_key "recipes", "households"
-  add_foreign_key "recipes", "users", column: "created_by_id", on_delete: :cascade
-  add_foreign_key "recipes", "users", column: "edited_by_id", on_delete: :cascade
   add_foreign_key "users", "households", on_delete: :cascade
 end

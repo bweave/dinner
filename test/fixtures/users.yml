@@ -5,11 +5,11 @@ brian:
   last_name: Weaver
   email: bdrums@gmail.com
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
-  password_reset_token: password_reset_token_one
-  confirmation_token: confirmation_token_one
+  password_reset_token: password_reset_token_brian
+  confirmation_token: confirmation_token_brian
   confirmed_at: <%= 1.minute.ago %>
-  remember_token: remember_token_one
-  session_token: session_token_one
+  remember_token: remember_token_brian
+  session_token: session_token_brian
   household: weavers
 
 angie:
@@ -17,9 +17,22 @@ angie:
   last_name: Weaver
   email: angiewestin@gmail.com
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
-  password_reset_token: password_reset_token_two
-  confirmation_token: confirmation_token_two
+  password_reset_token: password_reset_token_angie
+  confirmation_token: confirmation_token_angie
   confirmed_at: <%= 1.minute.ago %>
-  remember_token: remember_token_two
-  session_token: session_token_two
+  remember_token: remember_token_angie
+  session_token: session_token_angie
+  household: weavers
+
+pene:
+  first_name: Pene
+  last_name: Weaver
+  email: pene@gmail.com
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  password_reset_token: password_reset_token_pene
+  confirmation_token: confirmation_token_pene
+  confirmation_sent_at: <%= 1.minute.ago %>
+  confirmed_at: nil
+  remember_token: remember_token_pene
+  session_token: session_token_pene
   household: weavers

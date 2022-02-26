@@ -5,9 +5,9 @@ class User < ApplicationRecord
   MAILER_FROM_EMAIL = "howdy@bweave.dev"
   PASSWORD_RESET_TOKEN_EXPIRATION_IN_SECONDS = 10.minutes.to_i
 
-  has_many :recipes_created, foreign_key: "created_by_id"
-  has_many :menus_created, foreign_key: "created_by_id"
-  has_many :invitations, foreign_key: "created_by_id"
+  has_many :recipes_created, class_name: "Recipe", foreign_key: "created_by_id", dependent: :nullify
+  has_many :menus_created, class_name: "Menu", foreign_key: "created_by_id", dependent: :nullify
+  has_many :invitations_created, class_name: "Invitation", foreign_key: "created_by_id", dependent: :destroy
 
   accepts_nested_attributes_for :household
 

@@ -2,7 +2,10 @@ require "test_helper"
 
 class RecipesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @recipe = recipes(:one)
+    login users(:brian)
+    with_household :weavers
+    with_user :brian
+    @recipe = recipes(:tacos)
   end
 
   test "should get index" do
@@ -16,11 +19,17 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create recipe" do
-    assert_difference("Recipe.count") do
-      post recipes_url, params: { recipe: { last_suggested_at: @recipe.last_suggested_at, name: @recipe.name } }
+    assert_difference("Recipe.unscoped.count") do
+      recipe_params = {
+        name: "Sandwiches",
+        household_id: Household.current.id,
+        created_by_id: User.current.id,
+        edited_by_id: User.current.id,
+      }
+      post recipes_url, params: { recipe: recipe_params }
     end
 
-    assert_redirected_to recipe_url(Recipe.last)
+    assert_redirected_to recipe_url(Recipe.unscoped.last)
   end
 
   test "should show recipe" do
@@ -34,12 +43,13 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update recipe" do
-    patch recipe_url(@recipe), params: { recipe: { last_suggested_at: @recipe.last_suggested_at, name: @recipe.name } }
+    recipe_params = {name: "Sandwiches"}
+    patch recipe_url(@recipe), params: {recipe: recipe_params}
     assert_redirected_to recipe_url(@recipe)
   end
 
   test "should destroy recipe" do
-    assert_difference("Recipe.count", -1) do
+    assert_difference("Recipe.unscoped.count", -1) do
       delete recipe_url(@recipe)
     end
 

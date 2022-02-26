@@ -1,7 +1,6 @@
 class Current < ActiveSupport::CurrentAttributes
   attribute :user
   attribute :household
-  attribute :ignore_scoped_to_user
   attribute :ignore_scoped_to_household
 
   resets do

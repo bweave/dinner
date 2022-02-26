@@ -2,7 +2,10 @@ require "test_helper"
 
 class MenusControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @menu = menus(:one)
+    login users(:brian)
+    with_household :weavers
+    with_user :brian
+    @menu = menus(:this_week)
   end
 
   test "should get index" do
@@ -16,11 +19,18 @@ class MenusControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create menu" do
-    assert_difference("Menu.count") do
-      post menus_url, params: { menu: {  } }
+    assert_difference("Menu.unscoped.count") do
+      menu_params = {
+        starts_at: Time.current.beginning_of_week,
+        created_by_id: User.current.id,
+        edited_by_id: User.current.id,
+        household_id: Household.current.id,
+        recipe_ids: [recipes(:tacos).id],
+      }
+      post menus_url, params: {menu: menu_params}
     end
 
-    assert_redirected_to menu_url(Menu.last)
+    assert_redirected_to menus_url
   end
 
   test "should show menu" do
@@ -34,12 +44,12 @@ class MenusControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update menu" do
-    patch menu_url(@menu), params: { menu: {  } }
-    assert_redirected_to menu_url(@menu)
+    patch menu_url(@menu), params: {menu: {starts_at: @menu.starts_at, recipe_ids: [recipes(:burgers).id]}}
+    assert_redirected_to menus_url
   end
 
   test "should destroy menu" do
-    assert_difference("Menu.count", -1) do
+    assert_difference("Menu.unscoped.count", -1) do
       delete menu_url(@menu)
     end
 

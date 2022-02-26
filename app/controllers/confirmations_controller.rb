@@ -1,5 +1,5 @@
 class ConfirmationsController < ApplicationController
-  before_action :redirect_if_authenticated, only: %i[create new]
+  before_action :redirect_if_authenticated, only: %i[new create]
 
   def new
     @user = User.unscoped.new
