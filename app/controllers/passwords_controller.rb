@@ -30,23 +30,8 @@ class PasswordsController < ApplicationController
   end
 
   def update
-    @user = User.find_by(password_reset_token: params[:password_reset_token])
-
-    if @user
-      if @user.unconfirmed?
-        redirect_to new_confirmation_path, alert: "You must confirm your email before you can sign in."
-      elsif @user.password_reset_token_has_expired?
-        redirect_to new_password_path, alert: "Incorrect email or password."
-      elsif @user.update(password_params)
-        redirect_to login_path, notice: "Passwored updated successfully."
-      else
-        flash.now[:alert] = @user.errors.full_messages.to_sentence
-        render :edit        
-      end
-    else
-      flash.now[:alert] = "Incorrect email or password."
-      render :new
-    end
+    result = ResetPassword.new(params[:password_reset_token]).call(password_params)
+    redirect_to result.redirect, result.message
   end
 
   private

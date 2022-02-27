@@ -43,8 +43,8 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update recipe" do
-    recipe_params = {name: "Sandwiches"}
-    patch recipe_url(@recipe), params: {recipe: recipe_params}
+    recipe_params = { name: "Sandwiches" }
+    patch recipe_url(@recipe), params: { recipe: recipe_params }
     assert_redirected_to recipe_url(@recipe)
   end
 

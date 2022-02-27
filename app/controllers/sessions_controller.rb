@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
         login @user
         remember(@user) if params[:user][:remember_me] == "1"
         flash[:success] = "Logged in."
-        redirect_to after_login_path 
+        redirect_to after_login_path
       end
     else
       flash.now[:alert] = "Incorrect email or password."

@@ -25,7 +25,7 @@ class InvitationsController < ApplicationController
     Household.current = @invitation.household
 
     if @invitation.blank?
-      redirect_to root_path, alert: "Invalid invitation" 
+      redirect_to root_path, alert: "Invalid invitation"
     elsif @invitation.expired_token?
       redirect_to root_path, alert: "Expired invitation"
     else
@@ -36,7 +36,7 @@ class InvitationsController < ApplicationController
   def update
     @invitation = Invitation.unscoped.find_by(token: update_invitation_params.delete(:token))
     Household.current = @invitation.household
-    
+
     if @invitation.update(update_invitation_params.merge(accepted_at: Time.current))
       @invitation.user.send_confirmation_email!
       redirect_to root_url, notice: "Please check your email for confirmation instructions."
@@ -52,6 +52,8 @@ class InvitationsController < ApplicationController
   end
 
   def update_invitation_params
-    params.require(:invitation).permit(:token, user_attributes: [:first_name, :last_name, :password, :password_confirmation, :email, :household_id])
+    params.require(:invitation).permit(:token,
+                                       user_attributes: %i[first_name last_name password password_confirmation email
+                                                           household_id])
   end
 end

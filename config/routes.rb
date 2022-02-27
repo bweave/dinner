@@ -3,8 +3,9 @@ require "sidekiq/web"
 class AdminConstraint
   def matches?(request)
     return false unless request.session[:current_user_session_token].present?
+
     user = User.unscoped.find_by(session_token: request.session[:current_user_session_token])
-    user && user.admin?
+    user&.admin?
   end
 end
 

@@ -7,15 +7,9 @@ class Current < ActiveSupport::CurrentAttributes
     Time.zone = nil
   end
 
-  def household=(household)
-    super
-    # TODO: add time_zone to User
-    # Time.zone = user&.time_zone
-  end
-
-  def user=(user)
-    super
-    # TODO: add time_zone to User
-    # Time.zone = user&.time_zone
-  end
+  # def household=(household)
+  #   super
+  #   # TODO: add time_zone to User
+  #   Time.zone = household&.time_zone
+  # end
 end

@@ -9,14 +9,14 @@ class Invitation < ApplicationRecord
 
   has_secure_token :token
 
-  validates :email, format: {with: URI::MailTo::EMAIL_REGEXP}, presence: true, uniqueness: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
 
   accepts_nested_attributes_for :user
 
   def send_invitation_email
     regenerate_token
     update_columns(sent_at: Time.current)
-    mailer_params = {invitation: self, household: household, invited_by: created_by}
+    mailer_params = { invitation: self, household: household, invited_by: created_by }
     InvitationMailer.with(mailer_params).invite.deliver_later
   end
 

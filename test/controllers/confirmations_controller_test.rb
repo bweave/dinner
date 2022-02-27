@@ -8,7 +8,7 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should post create" do
     pene = users(:pene)
-    post confirmations_url, params: {user: {email: pene.email}}
+    post confirmations_url, params: { user: { email: pene.email } }
     assert_response :redirect, to: menus_url
   end
 

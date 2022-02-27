@@ -1,6 +1,6 @@
 require "active_support/core_ext/integer/time"
 
-Rails.application.configure do
+Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -53,7 +53,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -69,12 +69,12 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => Rails.application.credentials.gmail[:username],
-    :password             => Rails.application.credentials.gmail[:app_password],
-    :authentication       => "plain",
-    :enable_starttls_auto => true
+    address: "smtp.gmail.com",
+    port: 587,
+    user_name: Rails.application.credentials.gmail[:username],
+    password: Rails.application.credentials.gmail[:app_password],
+    authentication: "plain",
+    enable_starttls_auto: true,
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
@@ -92,7 +92,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger           = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end

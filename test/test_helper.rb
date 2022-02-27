@@ -50,6 +50,6 @@ end
 
 class ActionDispatch::IntegrationTest
   def login(user)
-    post login_url, params: {user: {email: user.email, password: "password"}}
+    post login_url, params: { user: { email: user.email, password: "password" } }
   end
 end

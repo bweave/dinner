@@ -2,7 +2,7 @@ class User < ApplicationRecord
   include ScopedToHousehold
 
   CONFIRMATION_TOKEN_EXPIRATION_IN_SECONDS = 10.minutes.to_i
-  MAILER_FROM_EMAIL = "howdy@bweave.dev"
+  MAILER_FROM_EMAIL = "howdy@bweave.dev".freeze
   PASSWORD_RESET_TOKEN_EXPIRATION_IN_SECONDS = 10.minutes.to_i
 
   has_many :recipes_created, class_name: "Recipe", foreign_key: "created_by_id", dependent: :nullify
@@ -22,8 +22,8 @@ class User < ApplicationRecord
   before_save :downcase_email
   before_save :downcase_unconfirmed_email
 
-  validates :email, format: {with: URI::MailTo::EMAIL_REGEXP}, presence: true, uniqueness: true
-  validates :unconfirmed_email, format: {with: URI::MailTo::EMAIL_REGEXP, allow_blank: true}
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
+  validates :unconfirmed_email, format: { with: URI::MailTo::EMAIL_REGEXP, allow_blank: true }
 
   def self.current
     Current.user
@@ -35,25 +35,25 @@ class User < ApplicationRecord
 
   # TODO: this will be in Rails 7.1, remove it after upgrading
   def self.authenticate_by(attributes)
-    passwords, identifiers = attributes.to_h.partition do |name, value|
+    passwords, identifiers = attributes.to_h.partition do |name, _value|
       !has_attribute?(name) && has_attribute?("#{name}_digest")
     end.map(&:to_h)
 
     raise ArgumentError, "One or more password arguments are required" if passwords.empty?
     raise ArgumentError, "One or more finder arguments are required" if identifiers.empty?
+
     if (record = find_by(identifiers))
       record if passwords.count { |name, value| record.public_send(:"authenticate_#{name}", value) } == passwords.size
     else
       new(passwords)
       nil
     end
-  end 
+  end
 
   def confirm!
     if unconfirmed_or_reconfirming?
-      if unconfirmed_email.present?
-        return false unless update(email: unconfirmed_email, unconfirmed_email: nil)
-      end
+      return false if unconfirmed_email.present? && !update(email: unconfirmed_email, unconfirmed_email: nil)
+
       update_columns(confirmed_at: Time.current)
     else
       false
@@ -82,6 +82,7 @@ class User < ApplicationRecord
 
   def confirmation_token_is_valid?
     return false if confirmation_sent_at.nil?
+
     (Time.current - confirmation_sent_at) <= User::CONFIRMATION_TOKEN_EXPIRATION_IN_SECONDS
   end
 
@@ -97,6 +98,7 @@ class User < ApplicationRecord
 
   def password_reset_token_has_expired?
     return true if password_reset_sent_at.nil?
+
     (Time.current - password_reset_sent_at) >= User::PASSWORD_RESET_TOKEN_EXPIRATION_IN_SECONDS
   end
 

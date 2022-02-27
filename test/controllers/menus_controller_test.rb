@@ -27,7 +27,7 @@ class MenusControllerTest < ActionDispatch::IntegrationTest
         household_id: Household.current.id,
         recipe_ids: [recipes(:tacos).id],
       }
-      post menus_url, params: {menu: menu_params}
+      post menus_url, params: { menu: menu_params }
     end
 
     assert_redirected_to menus_url
@@ -44,7 +44,7 @@ class MenusControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update menu" do
-    patch menu_url(@menu), params: {menu: {starts_at: @menu.starts_at, recipe_ids: [recipes(:burgers).id]}}
+    patch menu_url(@menu), params: { menu: { starts_at: @menu.starts_at, recipe_ids: [recipes(:burgers).id] } }
     assert_redirected_to menus_url
   end
 

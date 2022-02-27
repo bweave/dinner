@@ -1,13 +1,13 @@
 class MenusController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_menu, only: %i[ show edit update destroy ]
+  before_action :set_menu, only: %i[show edit update destroy]
 
   def index
     starts_at, direction = if params[:past_menus]
-                         [[..Time.current.beginning_of_week], :desc]
-                       else
-                         [[Time.current.beginning_of_week..], :asc]
-                       end
+                             [[..Time.current.beginning_of_week], :desc]
+                           else
+                             [[Time.current.beginning_of_week..], :asc]
+                           end
     @menus = Menu.where(starts_at: starts_at).includes(:recipes).order(starts_at: direction).limit(10)
   end
 
@@ -64,11 +64,12 @@ class MenusController < ApplicationController
   end
 
   private
-    def set_menu
-      @menu = Menu.find(params[:id])
-    end
 
-    def menu_params
-      params.require(:menu).permit(:created_by_id, :edited_by_id, :household_id, :starts_at, recipe_ids: [])
-    end
+  def set_menu
+    @menu = Menu.find(params[:id])
+  end
+
+  def menu_params
+    params.require(:menu).permit(:created_by_id, :edited_by_id, :household_id, :starts_at, recipe_ids: [])
+  end
 end

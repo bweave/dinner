@@ -16,7 +16,7 @@ class Menu < ApplicationRecord
   end
 
   def title
-    "Week of #{starts_at.strftime("%D")}"
+    "Week of #{starts_at.strftime('%D')}"
   end
 
   def this_week?

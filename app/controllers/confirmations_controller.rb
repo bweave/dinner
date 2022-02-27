@@ -16,7 +16,8 @@ class ConfirmationsController < ApplicationController
         redirect_to new_confirmation_path, alert: "Something went wrong."
       end
     else
-      redirect_to new_confirmation_path, alert: "We could not find a user with that email or that email has already been confirmed."
+      redirect_to new_confirmation_path,
+                  alert: "We could not find a user with that email or that email has already been confirmed."
     end
   end
 

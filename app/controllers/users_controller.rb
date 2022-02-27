@@ -69,10 +69,12 @@ class UsersController < ApplicationController
   end
 
   def create_user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, household_attributes: [:name])
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,
+                                 household_attributes: [:name])
   end
 
   def update_user_params
-    params.require(:user).permit(:first_name, :last_name, :current_password, :password, :password_confirmation, :unconfirmed_email, household_attributes: [:name])
+    params.require(:user).permit(:first_name, :last_name, :current_password, :password, :password_confirmation,
+                                 :unconfirmed_email, household_attributes: [:name])
   end
 end

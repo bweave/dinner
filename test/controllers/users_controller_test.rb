@@ -23,7 +23,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "should create user" do
     skip "TODO: admin privileges"
     assert_difference("User.count") do
-      post users_url, params: { user: {  } }
+      post users_url, params: { user: {} }
     end
 
     assert_redirected_to user_url(User.last)
@@ -45,7 +45,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       current_password: "password",
       first_name: "Scott",
     }
-    patch user_url(@user), params: {user: user_params}
+    patch user_url(@user), params: { user: user_params }
     assert_redirected_to edit_user_url(@user)
   end
 

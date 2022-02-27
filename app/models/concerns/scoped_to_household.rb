@@ -13,7 +13,7 @@ module ScopedToHousehold
       if ScopedToHousehold.ignore?
         all
       elsif Household.current.blank?
-        fail "You must set Household.current to access #{name} or use unscoped"
+        raise "You must set Household.current to access #{name} or use unscoped"
       else
         where(household_id: Household.current.id)
       end
@@ -47,7 +47,9 @@ module ScopedToHousehold
   def ensure_scoped_to_household
     return if ScopedToHousehold.ignore?
 
-    raise "You must set Household.current to save #{self} or set user_id" if Household.current.blank? && blank_household_id?
+    if Household.current.blank? && blank_household_id?
+      raise "You must set Household.current to save #{self} or set user_id"
+    end
 
     self.household_id = Household.current.id if new_record?
   end
