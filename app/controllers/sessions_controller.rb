@@ -12,7 +12,8 @@ class SessionsController < ApplicationController
     if @user.confirmed?
       login @user
       remember(@user) if params[:user][:remember_me] == "1"
-      redirect_to after_login_path, info: "Logged in."
+      flash[:success] = "Logged in."
+      redirect_to after_login_path
     else
       redirect_to new_confirmation_path, alert: "Please confirm your email first."
     end
