@@ -34,6 +34,8 @@ class User < ApplicationRecord
   end
 
   # TODO: this will be in Rails 7.1, remove it after upgrading
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
   def self.authenticate_by(attributes)
     passwords, identifiers = attributes.to_h.partition do |name, _value|
       !has_attribute?(name) && has_attribute?("#{name}_digest")
@@ -49,6 +51,8 @@ class User < ApplicationRecord
       nil
     end
   end
+  # rubocop:enable Metrics/PerceivedComplexity
+  # rubocop:enable Metrics/CyclomaticComplexity
 
   def confirm!
     if unconfirmed_or_reconfirming?

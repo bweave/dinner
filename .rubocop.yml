@@ -20,7 +20,7 @@ AllCops:
 Metrics/AbcSize:
   Description: 'A calculated magnitude based on number of assignments, branches, and conditions.'
   Enabled: true
-  Max: 20
+  Max: 25
 Metrics/MethodLength:
   CountComments: true
   Description: Avoid methods longer than 15 lines of code.
@@ -30,6 +30,8 @@ Metrics/MethodLength:
     - test/**/*
   Max: 15
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#short-methods'
+Style/AccessorGrouping:
+  EnforcedStyle: separated
 Style/Documentation:
   Description: Document classes and non-namespace modules.
   Enabled: false
@@ -66,3 +68,5 @@ Style/ClassAndModuleChildren:
   SupportedStyles:
     - nested
     - compact
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma

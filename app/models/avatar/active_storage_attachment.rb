@@ -6,7 +6,8 @@ module Avatar
         candidate.avatar.variable?
     end
 
-    attr_reader :object, :size
+    attr_reader :object
+    attr_reader :size
 
     def initialize(object:, options:)
       @object = object

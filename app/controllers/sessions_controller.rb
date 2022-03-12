@@ -7,20 +7,14 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.unscoped.authenticate_by(email: params[:user][:email].downcase, password: params[:user][:password])
+    return unable_to_authenticate if @user.blank?
 
-    if @user
-      if @user.unconfirmed?
-        redirect_to new_confirmation_path, alert: "You must confirm your email before you can sign in."
-      else
-        after_login_path = session[:user_return_to] || menus_path
-        login @user
-        remember(@user) if params[:user][:remember_me] == "1"
-        flash[:success] = "Logged in."
-        redirect_to after_login_path
-      end
+    if @user.confirmed?
+      login @user
+      remember(@user) if params[:user][:remember_me] == "1"
+      redirect_to after_login_path, info: "Logged in."
     else
-      flash.now[:alert] = "Incorrect email or password."
-      render :new, status: :unprocessable_entity
+      redirect_to new_confirmation_path, alert: "Please confirm your email first."
     end
   end
 
@@ -28,5 +22,16 @@ class SessionsController < ApplicationController
     forget(current_user)
     logout
     redirect_to root_path
+  end
+
+  private
+
+  def after_login_path
+    session[:user_return_to] || menus_path
+  end
+
+  def unable_to_authenticate
+    flash.now[:alert] = "Incorrect email or password."
+    render :new, status: :unprocessable_entity
   end
 end
