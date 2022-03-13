@@ -2,8 +2,8 @@
   <% if @menus.present? %>
     <div class="d-flex justify-content-between mb-3">
       <div class="btn-group">
-        <%= link_to "Current menus", menus_path, class: "btn btn-#{params[:past_menus].present? ? "outline-secondary" : "secondary active"}" %>
-        <%= link_to "Past menus", menus_path(past_menus: 1), class: "btn btn-#{params[:past_menus].present? ? "secondary active" : "outline-secondary"}" %>
+        <%= link_to "Current menus", menus_path, class: "btn btn-#{params[:past_menus].present? ? "outline-primary" : "primary active"}" %>
+        <%= link_to "Past menus", menus_path(past_menus: 1), class: "btn btn-#{params[:past_menus].present? ? "primary active" : "outline-primary"}" %>
       </div>
       <%= link_to new_menu_path, class: "btn btn-primary" do %>
         <i class="fa fa-plus"></i>

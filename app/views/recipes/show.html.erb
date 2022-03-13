@@ -1,25 +1,30 @@
+<div class="d-flex justify-content-end mb-3">
+  <%= link_to new_recipe_path, class: "btn btn-primary" do %>
+    <i class="fa fa-plus"></i>
+    New recipe
+  <% end %>
+</div>
 <div class="row justify-content-center mb-3">
   <div class="col-8">
     <div id="<%= dom_id @recipe %>">
       <% if @recipe.picture.representable? %>
         <%= image_tag @recipe.picture.variant(:large), class: "img-fluid" %>
       <% end %>
-      <h1><%= @recipe.name %></h1>
+      <div class="d-flex align-items-baseline">
+        <h1 class="me-3"><%= @recipe.name %></h1>
+        <div class="d-flex align-items-center">
+          <%= link_to edit_recipe_path(@recipe), class: "link-success fs-5" do %>
+            <i class="fa fa-pencil"></i>
+          <% end %>
+          <%= button_to @recipe, method: :delete, class: "btn btn-link text-danger fs-5" do %>
+            <i class="fa fa-trash"></i>
+          <% end %>
+        </div>
+      </div>
       <h2>Ingredients</h2>
       <p><%= @recipe.ingredients %></p>
       <h2>Directions</h2>
       <p><%= @recipe.directions %></p>
-    </div>
-
-    <div class="d-flex">
-      <%= link_to edit_recipe_path(@recipe), class: "btn btn-success me-3" do %>
-        <i class="fa fa-pencil"></i>
-        Edit
-      <% end %>
-      <%= button_to @recipe, method: :delete, class: "btn btn-outline-danger" do %>
-        <i class="fa fa-trash"></i>
-        Delete
-      <% end %>
     </div>
   </div>
 </div>

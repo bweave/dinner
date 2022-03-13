@@ -1,8 +1,8 @@
 <%= turbo_frame_tag menu do %>
-  <div class="d-flex justify-content-between align-items-baseline">
-    <h2 class="fs-4"><%= menu.title %></h2>
+  <div class="d-flex align-items-baseline">
+    <h2 class="fs-4 me-3"><%= menu.title %></h2>
     <div class="d-flex align-items-center">
-      <%= link_to edit_menu_path(menu), class: "link-success fs-5 me-2", title: "Edit this menu" do %>
+      <%= link_to edit_menu_path(menu), class: "link-success fs-5", title: "Edit this menu" do %>
         <i class="fa fa-pencil"></i>
       <% end %>
       <%= button_to menu, method: :delete, class: "btn btn-link text-danger fs-5", title: "Delete this menu", data: {turbo_confirm: "Are you sure?"} do %>
