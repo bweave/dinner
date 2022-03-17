@@ -1,7 +1,7 @@
 <div id="<%= dom_id recipe %>" class="card h-100">
   <% if recipe.picture.representable? %>
     <%= link_to recipe, target: "_top" do %>
-      <%= image_tag recipe.picture.variant(:medium), class: "card-img-top" %>
+      <%= recipe_header_img(recipe) %>
     <% end %>
   <% end %>
   <div class="card-body">
