@@ -26,7 +26,10 @@
         <div class="col">
           <div class="card h-100">
             <% if b.object.picture.representable? %>
-              <%= image_tag b.object.picture.variant(:thumb), class: "card-img-top" %>
+              <div
+                class="recipe-header"
+                style="--bg-img-url: url('<%= url_for(b.object.picture.variant(:thumb)) %>')"
+              ></div>
             <% end %>
             <div class="card-body">
               <div class="form-check">
