@@ -3,6 +3,14 @@
 @import "bootstrap";
 @import "font-awesome";
 
+.recipe-header {
+  height: 0;
+  padding-top: 75%;
+  background-image: var(--bg-img-url);
+  background-size: cover;
+  background-position: center;
+}
+
 // forms
 form:not(.button_to) {
   label {

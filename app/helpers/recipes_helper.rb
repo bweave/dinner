@@ -3,12 +3,8 @@ module RecipesHelper
     content_tag(
       :div,
       nil,
-      style: <<~STYLE.squish,
-        heigh:0;
-        padding-top:56.25%;
-        background-image:url(#{url_for(recipe.picture.variant(:medium))});
-        background-size:cover;
-      STYLE
+      class: "recipe-header",
+      style: "--bg-img-url: url('#{url_for(recipe.picture.variant(:medium))}')",
     )
   end
 end
